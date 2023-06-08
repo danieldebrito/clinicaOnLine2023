@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <a class="nav-link" href="/home">
             <img src="/assets/logo/logo.png" alt="" srcset="">
-          </a>
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2"
             aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -37,10 +37,33 @@
                         </ul>
                     </li>
                 </ul>
-                <form class="d-flex mt-3 mt-lg-0" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                <ul class="nav navbar-nav navbar-right" *ngIf="authService.userData as user; else login">
+                    <li class="nav-item">
+                        <a class="nav-link"></a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            {{ authService.userData.email }}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" (click)="authService.SignOut()">Sign Out</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+
+                <ng-template #login>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/sign-in">Ingresá</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-success" routerLink="/sign-up">Creá tu cuenta</a>
+                        </li>
+                    </ul>
+                </ng-template>
             </div>
         </div>
     </div>

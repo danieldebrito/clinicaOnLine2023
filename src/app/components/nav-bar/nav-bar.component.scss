@@ -35,7 +35,7 @@ body {
   padding-top: .75rem;
   padding-bottom: .75rem;
   font-size: .875rem;
-  color: #6c757d;
+  color: #FF2E63 !important;
 }
 
 .nav-scroller .nav-link:hover {
@@ -47,10 +47,37 @@ body {
   color: #343a40;
 }
 
-.bg-purple {
-  background-color: #6f42c1;
-}
-
 img {
   width: 250px;
+}
+
+
+.nav-link {
+  color: #FF2E63 !important;
+  font-weight:bold;
+  font-size:1.3em;
+  font-family: Century Gothic, sans-serif;
+  text-shadow: 1px 1px 0.5px #1D3557;
+}
+.navbar-collapse {
+  justify-content: center,
+}
+
+.logo {
+  color: #1D3557 !important;
+  font-size:1.5em;
+}
+
+.navbar {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  font-weight: bold;
+}
+
+a:hover {
+  color: #08D9D6 !important;
+  text-shadow: 1px 1px 0.5px #FF2E63;
 }
