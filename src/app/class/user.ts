@@ -7,5 +7,14 @@ export class User {
       public displayName?: string,
       public photoURL?: string,
       public emailVerified?: string,
+      public nombre?: string,
+      public apellido?: string,
+      public sexo?: string,
+      public dni?: number,
+      public edad?: number,
+      public fechaNacimiento?: string,
+      public foto?: string,
+      public role?: string,
+      public habilitado?: boolean
     ) { }
   }
