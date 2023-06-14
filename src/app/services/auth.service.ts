@@ -159,7 +159,6 @@ export class AuthService {
     // take 1 parta que el orservable sea de un solo uso.
     allItems.pipe(take(1)).subscribe(res => {
       this.allUsers = res;
-      console.log(this.allUsers);
       userData = this.allUsers.find(usr => usr.uid == user.uid);
 
       console.table(userData);

@@ -31,7 +31,7 @@ export class SignInComponent {
     }
   }
 
-  public AutoSignIn(){
+  public AutoSignIn(){  /// login de prueba
     this.loginForm.setValue( { email: 'danieldebrito@outlook.com', password: '123456' });
   }
 
