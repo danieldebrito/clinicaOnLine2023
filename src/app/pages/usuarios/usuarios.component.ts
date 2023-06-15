@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/class/user';
+import { Usuario } from 'src/app/class/usuario';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class UsuariosComponent implements OnInit {
 
-  public usuarios: User[] = [];
+  public usuarios: Usuario[] = [];
 
   constructor( private usuariosSvc: UsuariosService ){}
 

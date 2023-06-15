@@ -5,135 +5,149 @@
         <h3>Sign Up</h3>
 
 
-<form [formGroup]="createForm" (ngSubmit)="createUser()">
-  
-  <!-- Campo Email -->
-  <div>
-    <label for="email">Email:</label>
-    <input type="email" id="email" formControlName="email" required minlength="6">
-    <div *ngIf="createForm.get('email')?.errors?.['required']">El campo Email es requerido.</div>
-    <div *ngIf="createForm.get('email')?.errors?.['minlength']">El campo Email debe tener al menos 6 caracteres.</div>
-  </div>
-  
-  <!-- Campo Password -->
-  <div>
-    <label for="password">Password:</label>
-    <input type="password" id="password" formControlName="password" required minlength="6">
-    <div *ngIf="createForm.get('password')?.errors?.['required']">El campo Password es requerido.</div>
-    <div *ngIf="createForm.get('password')?.errors?.['minlength']">El campo Password debe tener al menos 6 caracteres.</div>
-  </div>
-  
-  <!-- Campo DisplayName -->
-  <div>
-    <label for="displayName">Display Name:</label>
-    <input type="text" id="displayName" formControlName="displayName" required minlength="6">
-    <div *ngIf="createForm.get('displayName')?.errors?.['required']">El campo Display Name es requerido.</div>
-    <div *ngIf="createForm.get('displayName')?.errors?.['minlength']">El campo Display Name debe tener al menos 6 caracteres.</div>
-  </div>
-  
-  <!-- Campo photoURL -->
-  <div>
-    <label for="photoURL">Photo URL:</label>
-    <input type="text" id="photoURL" formControlName="photoURL" required minlength="6">
-    <div *ngIf="createForm.get('photoURL')?.errors?.['required']">El campo Photo URL es requerido.</div>
-    <div *ngIf="createForm.get('photoURL')?.errors?.['minlength']">El campo Photo URL debe tener al menos 6 caracteres.</div>
-  </div>
-  
-  <!-- Campo emailVerified -->
-  <div>
-    <label for="emailVerified">Email Verified:</label>
-    <input type="text" id="emailVerified" formControlName="emailVerified" required minlength="6">
-    <div *ngIf="createForm.get('emailVerified')?.errors?.['required']">El campo Email Verified es requerido.</div>
-    <div *ngIf="createForm.get('emailVerified')?.errors?.['minlength']">El campo Email Verified debe tener al menos 6 caracteres.</div>
-  </div>
-  
-  <!-- Campo nombre -->
-  <div>
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" formControlName="nombre" required minlength="6">
-    <div *ngIf="createForm.get('nombre')?.errors?.['required']">El campo Nombre es requerido.</div>
-    <div *ngIf="createForm.get('nombre')?.errors?.['minlength']">El campo Nombre debe tener al menos 6 caracteres.</div>
-  </div>
-  
-  <!-- Campo apellido -->
-  <div>
-    <label for="apellido">Apellido:</label>
-    <input type="text" id="apellido" formControlName="apellido" required minlength="6">
-    <div *ngIf="createForm.get('apellido')?.errors?.['required']">El campo Apellido es requerido.</div>
-    <div *ngIf="createForm.get('apellido')?.errors?.['minlength']">El campo Apellido debe tener al menos 6 caracteres.</div>
-  </div>
-  
-  <!-- Campo sexo -->
-  <div>
-    <label for="sexo">Sexo:</label>
-    <input type="text" id="sexo" formControlName="sexo" required minlength="6">
-    <div *ngIf="createForm.get('sexo')?.errors?.['required']">El campo Sexo es requerido.</div>
-    <div *ngIf="createForm.get('sexo')?.errors?.['minlength']">El campo Sexo debe tener al menos 6 caracteres.</div>
-  </div>
-  
-  <!-- Campo dni -->
-  <div>
-    <label for="dni">DNI:</label>
-    <input type="text" id="dni" formControlName="dni" required minlength="6">
-    <div *ngIf="createForm.get('dni')?.errors?.['required']">El campo DNI es requerido.</div>
-    <div *ngIf="createForm.get('dni')?.errors?.['minlength']">El campo DNI debe tener al menos 6 caracteres.</div>
-  </div>
-  
-  <!-- Campo edad -->
-  <div>
-    <label for="edad">Edad:</label>
-    <input type="number" id="edad" formControlName="edad" required min="18">
-    <div *ngIf="createForm.get('edad')?.errors?.['required']">El campo Edad es requerido.</div>
-    <div *ngIf="createForm.get('edad')?.errors?.['minlength']">La edad mínima permitida es 18 años.</div>
-  </div>
-  
-  <!-- Campo fechaNacimiento -->
-  <div>
-    <label for="fechaNacimiento">Fecha de Nacimiento:</label>
-    <input type="date" id="fechaNacimiento" formControlName="fechaNacimiento" required>
-    <div *ngIf="createForm.get('fechaNacimiento')?.errors?.['required']">El campo Fecha de Nacimiento es requerido.</div>
-  </div>
-  
-  <!-- Campo foto -->
-  <div>
-    <label for="foto">Foto:</label>
-    <input type="text" id="foto" formControlName="foto" required minlength="6">
-    <div *ngIf="createForm.get('foto')?.errors?.['required']">El campo Foto es requerido.</div>
-    <div *ngIf="createForm.get('foto')?.errors?.['minlength']">El campo Foto debe tener al menos 6 caracteres.</div>
-  </div>
-  
-  <!-- Campo role -->
-  <div>
-    <label for="role">Role:</label>
-    <input type="text" id="role" formControlName="role" required minlength="6">
-    <div *ngIf="createForm.get('role')?.errors?.['required']">El campo Role es requerido.</div>
-    <div *ngIf="createForm.get('role')?.errors?.['minlength']">El campo Role debe tener al menos 6 caracteres.</div>
-  </div>
-  
-  <!-- Campo habilitado -->
-  <div>
-    <label for="habilitado">Habilitado:</label>
-    <input type="checkbox" id="habilitado" formControlName="habilitado" required>
-    <div *ngIf="createForm.get('habilitado')?.errors?.['required']">El campo Habilitado es requerido.</div>
-  </div>
-  
-  <button type="submit">Crear Usuario</button>
-</form>
+        <form [formGroup]="createForm" (ngSubmit)="createUser()">
+
+          <!-- Campo Email -->
+          <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" formControlName="email" required minlength="6">
+            <div *ngIf="createForm.get('email')?.errors?.['required']">El campo Email es requerido.</div>
+            <div *ngIf="createForm.get('email')?.errors?.['minlength']">El campo Email debe tener al menos 6 caracteres.
+            </div>
+          </div>
+
+          <!-- Campo Password -->
+          <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" formControlName="password" required minlength="6">
+            <div *ngIf="createForm.get('password')?.errors?.['required']">El campo Password es requerido.</div>
+            <div *ngIf="createForm.get('password')?.errors?.['minlength']">El campo Password debe tener al menos 6
+              caracteres.</div>
+          </div>
+
+          <!-- Campo DisplayName -->
+          <div>
+            <label for="displayName">Display Name:</label>
+            <input type="text" id="displayName" formControlName="displayName" required minlength="6">
+            <div *ngIf="createForm.get('displayName')?.errors?.['required']">El campo Display Name es requerido.</div>
+            <div *ngIf="createForm.get('displayName')?.errors?.['minlength']">El campo Display Name debe tener al menos
+              6 caracteres.</div>
+          </div>
+
+          <!-- Campo photoURL -->
+          <div>
+            <label for="photoURL">Photo URL:</label>
+            <input type="text" id="photoURL" formControlName="photoURL" required minlength="6">
+            <div *ngIf="createForm.get('photoURL')?.errors?.['required']">El campo Photo URL es requerido.</div>
+            <div *ngIf="createForm.get('photoURL')?.errors?.['minlength']">El campo Photo URL debe tener al menos 6
+              caracteres.</div>
+          </div>
+
+          <!-- Campo emailVerified -->
+          <div>
+            <label for="emailVerified">Email Verified:</label>
+            <input type="text" id="emailVerified" formControlName="emailVerified" required minlength="6">
+            <div *ngIf="createForm.get('emailVerified')?.errors?.['required']">El campo Email Verified es requerido.
+            </div>
+            <div *ngIf="createForm.get('emailVerified')?.errors?.['minlength']">El campo Email Verified debe tener al
+              menos 6 caracteres.</div>
+          </div>
+
+          <!-- Campo nombre -->
+          <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" formControlName="nombre" required minlength="6">
+            <div *ngIf="createForm.get('nombre')?.errors?.['required']">El campo Nombre es requerido.</div>
+            <div *ngIf="createForm.get('nombre')?.errors?.['minlength']">El campo Nombre debe tener al menos 6
+              caracteres.</div>
+          </div>
+
+          <!-- Campo apellido -->
+          <div>
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" formControlName="apellido" required minlength="6">
+            <div *ngIf="createForm.get('apellido')?.errors?.['required']">El campo Apellido es requerido.</div>
+            <div *ngIf="createForm.get('apellido')?.errors?.['minlength']">El campo Apellido debe tener al menos 6
+              caracteres.</div>
+          </div>
+
+          <!-- Campo sexo -->
+          <div>
+            <label for="sexo">Sexo:</label>
+            <input type="text" id="sexo" formControlName="sexo" required minlength="6">
+            <div *ngIf="createForm.get('sexo')?.errors?.['required']">El campo Sexo es requerido.</div>
+            <div *ngIf="createForm.get('sexo')?.errors?.['minlength']">El campo Sexo debe tener al menos 6 caracteres.
+            </div>
+          </div>
+
+          <!-- Campo dni -->
+          <div>
+            <label for="dni">DNI:</label>
+            <input type="text" id="dni" formControlName="dni" required minlength="6">
+            <div *ngIf="createForm.get('dni')?.errors?.['required']">El campo DNI es requerido.</div>
+            <div *ngIf="createForm.get('dni')?.errors?.['minlength']">El campo DNI debe tener al menos 6 caracteres.
+            </div>
+          </div>
+
+          <!-- Campo edad -->
+          <div>
+            <label for="edad">Edad:</label>
+            <input type="number" id="edad" formControlName="edad" required min="18">
+            <div *ngIf="createForm.get('edad')?.errors?.['required']">El campo Edad es requerido.</div>
+            <div *ngIf="createForm.get('edad')?.errors?.['minlength']">La edad mínima permitida es 18 años.</div>
+          </div>
+
+          <!-- Campo fechaNacimiento -->
+          <div>
+            <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+            <input type="date" id="fechaNacimiento" formControlName="fechaNacimiento" required>
+            <div *ngIf="createForm.get('fechaNacimiento')?.errors?.['required']">El campo Fecha de Nacimiento es
+              requerido.</div>
+          </div>
+
+          <!-- Campo foto -->
+          <div>
+            <label for="foto">Foto:</label>
+            <input type="text" id="foto" formControlName="foto" required minlength="6">
+            <div *ngIf="createForm.get('foto')?.errors?.['required']">El campo Foto es requerido.</div>
+            <div *ngIf="createForm.get('foto')?.errors?.['minlength']">El campo Foto debe tener al menos 6 caracteres.
+            </div>
+          </div>
+
+          <!-- Campo role -->
+          <div>
+            <label for="role">Role:</label>
+            <input type="text" id="role" formControlName="role" required minlength="6">
+            <div *ngIf="createForm.get('role')?.errors?.['required']">El campo Role es requerido.</div>
+            <div *ngIf="createForm.get('role')?.errors?.['minlength']">El campo Role debe tener al menos 6 caracteres.
+            </div>
+          </div>
+
+          <!-- Campo habilitado -->
+          <div>
+            <label for="habilitado">Habilitado:</label>
+            <input type="checkbox" id="habilitado" formControlName="habilitado" required>
+            <div *ngIf="createForm.get('habilitado')?.errors?.['required']">El campo Habilitado es requerido.</div>
+          </div>
+
+
+          <button type="submit" [disabled]="!createForm.valid">Crear Usuario</button>
+        </form>
 
 
 
-      <div class="formGroup">
-        <button type="button" class="btn googleBtn" (click)="GoogleAuth()">
-          <i class="fab fa-google-plus-g"></i>
-          Continue with Google
-        </button>
-      </div>
+        <div class="formGroup">
+          <button type="button" class="btn googleBtn" (click)="GoogleAuth()">
+            <i class="fab fa-google-plus-g"></i>
+            Continue with Google
+          </button>
+        </div>
 
 
-      <div class="redirectToLogin">
-        <span>Already have an account?
-          <span class="redirect" routerLink="/sign-in">Log In</span></span>
+        <div class="redirectToLogin">
+          <span>Already have an account?
+            <span class="redirect" routerLink="/sign-in">Log In</span></span>
+        </div>
       </div>
     </div>
   </div>
-</div>

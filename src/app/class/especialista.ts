@@ -1,4 +1,4 @@
-import { User } from "./user";
+import { User } from "./usuario";
 import { Especialidad } from './especialidad';
 
 export class Especialista extends User {

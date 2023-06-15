@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { collection, collectionData, deleteDoc, doc, docData, Firestore, orderBy, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { User } from '../class/user';
+import { Usuario } from '../class/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class UsuariosService {
 
   constructor(private firestore: Firestore) { }
 
-  public addItem(item: User) {
+  public addItem(item: Usuario) {
     const col = collection(this.firestore, 'usuarios');
     const newDoc = doc(col);
 
@@ -18,12 +18,12 @@ export class UsuariosService {
     setDoc(newDoc, item);
   }
 
-  public getItems(): Observable<User[]> {
+  public getItems(): Observable<Usuario[]> {
     const col = collection(this.firestore, 'usuarios');
     //                 const queryObservable = query(col, orderBy('email')); // ORDENARRRR
     const observable = collectionData(col).pipe(
       map(res => {
-        return res as User[];
+        return res as Usuario[];
       }),
       catchError(err => {
         console.error('Error obteniendo datos:', err);
@@ -33,13 +33,13 @@ export class UsuariosService {
     return observable;
   }
 
-  public getItemById(id: string): Observable<User> {
+  public getItemById(id: string): Observable<Usuario> {
     const col = collection(this.firestore, 'usuarios');
     const documento = doc(col, id);
 
     const observable = docData(documento).pipe(
       map(res => {
-        return res as User;
+        return res as Usuario;
       }),
       catchError(err => {
         console.error('Error obteniendo el documento:', err);
@@ -49,7 +49,7 @@ export class UsuariosService {
     return observable;
   }
 
-  public getItemByUid(uid: string): Observable<User> {
+  public getItemByUid(uid: string): Observable<Usuario> {
     const col = collection(this.firestore, 'usuarios');
     const queryRef = query(col, where('uid', '==', uid));
 
@@ -57,7 +57,7 @@ export class UsuariosService {
       map(res => {
         // Debería haber solo un resultado, por lo que se toma el primer elemento del array
         const user = res[0];
-        return user as User;
+        return user as Usuario;
       }),
       catchError(err => {
         console.error('Error obteniendo el usuario:', err);

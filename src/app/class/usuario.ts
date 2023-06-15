@@ -1,9 +1,9 @@
-export class User {
+export class Usuario {
   constructor(
     public uid?: string,
     public id?: string,
-    public email?: string | null | undefined,
-    public password?: string | null | undefined,
+    public email: string = '',
+    public password: string = '',
     public displayName?: string,
     public photoURL?: string,
     public emailVerified?: string,
