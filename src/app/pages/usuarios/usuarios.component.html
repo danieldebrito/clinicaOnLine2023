@@ -8,8 +8,8 @@
                 <tr>
                     <th><span>User</span></th>
                     <th><span>Nacimiento</span></th>
-                    <th class="text-center"><span>Avatar</span></th>
-                    <th><span>Email</span></th>
+                    <th class="text-center"><span>Email</span></th>
+                    <th><span>Email Vericado ?</span></th>
                     <th>&nbsp;</th>
                 </tr>
             </thead>
@@ -24,10 +24,26 @@
                         {{ item.fechaNacimiento }}
                     </td>
                     <td class="text-center">
-                        <span class="label label-default">Inactive</span>
+                        <span class="label label-default">{{ item.email }}</span>
                     </td>
                     <td>
-                        <a href="#">{{ item.email }}</a>
+                        <div *ngIf="item.emailVerified">
+                            <a href="#" class="table-link">
+                                <span class="fa-stack">
+                                    <i class="fa fa-square fa-stack-2x"></i>
+                                    <i class="fa fa-check fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </div>
+                        <div *ngIf="!item.emailVerified">
+                            <a href="#" class="table-link danger">
+                                <span class="fa-stack">
+                                    <i class="fa fa-square fa-stack-2x"></i>
+                                    <i class="fa fa-xmark fa-toggle-on fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </div>
+                        <span class="label label-default">{{ item.emailVerified }}</span>
                     </td>
                     <td style="width: 20%;">
                         <a href="#" class="table-link">
