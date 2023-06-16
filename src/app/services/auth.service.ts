@@ -1,6 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 
-import { User } from 'src/app/class/user';
+import { Usuario } from 'src/app/class/usuario';
 import { UserLog } from 'src/app/class/userLog'; 
 
 import { Router } from '@angular/router';
@@ -18,7 +18,7 @@ import { LogUserService } from './log-user.service';
 })
 export class AuthService {
   userData: any; // Save logged in user data
-  public allUsers: User[] = [];
+  public allUsers: Usuario[] = [];
 
   constructor(
     private logUserSv: LogUserService,
@@ -138,7 +138,7 @@ export class AuthService {
     if (userDoc.exists()) {
       console.log('El usuario ya está registrado');
     } else {
-      const userData: User = {
+      const userData: Usuario = {
         uid: user.uid,
         email: user.email,
         displayName: user.displayName,
@@ -178,13 +178,13 @@ export class AuthService {
     });
   }
 
-  public getUserByID(id: string): Observable<User> {
+  public getUserByID(id: string): Observable<Usuario> {
     const col = collection(this.afs, 'usuarios');
     const documento = doc(col, id);
 
     const observable = docData(documento).pipe(
       map(res => {
-        return res as User;
+        return res as Usuario;
       }),
       catchError(err => {
         console.error('Error obteniendo el documento:', err);

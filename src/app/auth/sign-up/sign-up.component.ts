@@ -74,7 +74,9 @@ export class SignUpComponent {
   }
 
   public createUserAuth(usuario: Usuario){
-    this.authService.SignUp(usuario);
+    const pass = usuario.password ?? '';
+    const email = usuario.email ?? '';
+    this.authService.SignUp(email, pass);
   }
 
   public GoogleAuth() {
