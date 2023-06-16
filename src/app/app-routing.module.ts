@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'forgot-password', loadChildren: () => import('./auth/forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule) },
   { path: 'verify-email', loadChildren: () => import('./auth/verify-email/verify-email.module').then(m => m.VerifyEmailModule) },
   { path: 'usuarios', loadChildren: () => import('./pages/usuarios/usuarios.module').then(m => m.UsuariosModule) },
+  { path: 'contacto', loadChildren: () => import('./pages/contacto/contacto.module').then(m => m.ContactoModule) },
   { path: '**', loadChildren: () => import('./pages/error404/error404.module').then(m => m.Error404Module) },
   { path: 'error', loadChildren: () => import('./pages/error404/error404.module').then(m => m.Error404Module) },
 ];

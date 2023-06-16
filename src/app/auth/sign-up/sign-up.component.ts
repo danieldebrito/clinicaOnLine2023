@@ -20,11 +20,12 @@ export class SignUpComponent {
   createForm = new FormGroup({
     //uid: new FormControl('', [Validators.required, Validators.minLength(6)]),
     //id: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    //emailVerified: new FormControl('', [Validators.required, Validators.minLength(6)]),
+
     email: new FormControl('', [Validators.required, Validators.minLength(6)]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     displayName: new FormControl('', [Validators.required, Validators.minLength(6)]),
     photoURL: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    emailVerified: new FormControl('', [Validators.required, Validators.minLength(6)]),
     nombre: new FormControl('', [Validators.required, Validators.minLength(6)]),
     apellido: new FormControl('', [Validators.required, Validators.minLength(6)]),
     sexo: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -36,21 +37,22 @@ export class SignUpComponent {
     habilitado: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
 
-  constructor(private authService: AuthService, private usuariosService: UsuariosService) {}
+  constructor(private authService: AuthService, private usuariosService: UsuariosService) { }
 
 
   public createUser() {
     if (this.createForm.valid) {
 
       const habilitadoValue = this.createForm.value.habilitado === 'true' ? true : false;
-  
+
       const newItem: Usuario = {
         //id: this.createForm.value.id ?? '',
+        //emailVerified: this.createForm.value.emailVerified ?? '',
+
         email: this.createForm.value.email ?? '',
         password: this.createForm.value.password ?? '',
         displayName: this.createForm.value.displayName ?? '',
         photoURL: this.createForm.value.photoURL ?? '',
-        emailVerified: this.createForm.value.emailVerified ?? '',
         nombre: this.createForm.value.nombre ?? '',
         apellido: this.createForm.value.apellido ?? '',
         sexo: this.createForm.value.sexo ?? '',
@@ -62,9 +64,10 @@ export class SignUpComponent {
         habilitado: habilitadoValue,
       };
 
-      this.createUserAuth(newItem);
+      // this.createUserAuth(newItem);
+      this.authService.SignUp(newItem);
 
-  
+
       console.log(newItem);
       //this.usuariosService.addItem(newItem);
     } else {
@@ -73,10 +76,10 @@ export class SignUpComponent {
     }
   }
 
-  public createUserAuth(usuario: Usuario){
+  public createUserAuth(usuario: Usuario) {
     const pass = usuario.password ?? '';
     const email = usuario.email ?? '';
-    this.authService.SignUp(email, pass);
+    //this.authService.SignUp(email, pass);
   }
 
   public GoogleAuth() {

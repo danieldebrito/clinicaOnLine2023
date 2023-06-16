@@ -1,12 +1,3 @@
-html,
-body {
-  overflow-x: hidden; /* Prevent scroll on narrow devices */
-}
-
-body {
-  padding-top: 56px;
-}
-
 @media (max-width: 991.98px) {
   .offcanvas-collapse {
     position: fixed;
@@ -35,7 +26,7 @@ body {
   padding-top: .75rem;
   padding-bottom: .75rem;
   font-size: .875rem;
-  color: #FF2E63 !important;
+  color: #0b5a32 !important;
 }
 
 .nav-scroller .nav-link:hover {
@@ -53,11 +44,11 @@ img {
 
 
 .nav-link {
-  color: #FF2E63 !important;
+  color: #37ac72 !important;
   font-weight:bold;
   font-size:1.3em;
   font-family: Century Gothic, sans-serif;
-  text-shadow: 1px 1px 0.5px #1D3557;
+  text-shadow: 1px 1px 0.5px #144114;
 }
 .navbar-collapse {
   justify-content: center,
@@ -69,15 +60,16 @@ img {
 }
 
 .navbar {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 4px 8px 0 rgba(32, 121, 39, 0.2), 0 6px 20px 0 rgba(16, 90, 38, 0.19);
   top: 0;
   left: 0;
   right: 0;
   z-index: 2;
   font-weight: bold;
+  background-color: white;
 }
 
 a:hover {
   color: #08D9D6 !important;
-  text-shadow: 1px 1px 0.5px #FF2E63;
+  text-shadow: 1px 1px 0.5px #24cc78;
 }

@@ -1,34 +1,36 @@
 import { Injectable, NgZone } from '@angular/core';
-
 import { Usuario } from 'src/app/class/usuario';
-import { UserLog } from 'src/app/class/userLog'; 
+import { UserLog } from 'src/app/class/userLog';
 
 import { Router } from '@angular/router';
 import { catchError, map, take } from 'rxjs/operators';
 
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import * as auth from 'firebase/auth';
-import { collection, collectionData, doc, docData, Firestore, getDoc, setDoc, updateDoc } from '@angular/fire/firestore';
+import { collection, collectionData, doc, docData, Firestore, updateDoc } from '@angular/fire/firestore';
 import { Observable, throwError } from 'rxjs';
 import { LogUserService } from './log-user.service';
+import { UsuariosService } from './usuarios.service';
+import * as auth from 'firebase/auth';
+
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+
   userData: any; // Save logged in user data
-  public allUsers: Usuario[] = [];
+  public allUsers: any[] = [];
 
   constructor(
     private logUserSv: LogUserService,
-    public afs: Firestore, // Inject Firestore service
-    public afAuth: AngularFireAuth, // Inject Firebase auth service
+    private usuariosSv: UsuariosService,
+    public afs: Firestore,
+    public afAuth: AngularFireAuth,
     public router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public ngZone: NgZone
   ) {
-    /* Saving user data in localstorage when
-    logged in and setting up null when logged out */
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.userData = user;
@@ -46,7 +48,10 @@ export class AuthService {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((res) => {
-        this.UpdateUserData(password, res.user);
+        if (res.user) {
+          this.UpdateUserData(password, res.user!);
+        }
+  
         this.afAuth.authState.subscribe((user) => {
           if (user) {
             this.router.navigate(['home']);
@@ -57,19 +62,24 @@ export class AuthService {
         console.log(error.message);
       });
   }
-
-
+  
 
   // Sign up with email/password
-  SignUp(email: string, password: string) {
+  SignUp(usuario: Usuario) {
     return this.afAuth
-      .createUserWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(usuario.email, usuario.password)
       .then((result) => {
         /* Call the SendVerificaitonMail() function when new user sign
         up and returns promise */
         this.SendVerificationMail();
 
-        this.SetUserData(result.user);
+        usuario.uid = result.user?.uid;
+        usuario.displayName = result.user?.displayName ?? '';
+        usuario.emailVerified = result.user?.emailVerified ?? false;
+
+        this.usuariosSv.addItem(usuario);
+
+        /////////////////////////////////////////////////////////////////////////////////////////this.SetUserData(result.user);
       })
       .catch((error) => {
         console.log(error.message);
@@ -100,6 +110,7 @@ export class AuthService {
     return user !== null && user.emailVerified !== false ? true : false;
   }
   // Sign in with Google
+  // Sign in with Google
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
       this.router.navigate(['home']);
@@ -112,7 +123,8 @@ export class AuthService {
       .then((result) => {
         this.router.navigate(['home']);
 
-        this.SetUserData(result.user);
+        /////////////////////////////////////////////////////////////////////////////////////////this.SetUserData(result.user);
+
         this.cargarLog(result.user);  /// cargo el log
 
         console.log(result.user);
@@ -128,9 +140,10 @@ export class AuthService {
       this.router.navigate(['sign-in']);
     });
   }
+
   /*Setting up user data when sign in with username/password,
   sign up with username/password and sign in with social auth
-  provider in Firestore database */
+  provider in Firestore database 
   async SetUserData(user: any) {
     const col = collection(this.afs, 'usuarios');
     const userDoc = await getDoc(doc(col, user.uid));
@@ -138,6 +151,7 @@ export class AuthService {
     if (userDoc.exists()) {
       console.log('El usuario ya está registrado');
     } else {
+      
       const userData: Usuario = {
         uid: user.uid,
         email: user.email,
@@ -146,17 +160,18 @@ export class AuthService {
         emailVerified: user.emailVerified,
       };
 
-      setDoc(doc(col, user.uid), userData);
+      //setDoc(doc(col, user.uid), user);
     }
   }
+  */
 
-  UpdateUserData(pass: string, user: any) {
+
+  UpdateUserData(pass: string, user: firebase.default.User) { // Update the type of user parameter
     const col = collection(this.afs, 'usuarios');
     const allItems = collectionData(col);
 
     let userData: any = {};
 
-    // take 1 parta que el orservable sea de un solo uso.
     allItems.pipe(take(1)).subscribe(res => {
       this.allUsers = res;
       userData = this.allUsers.find(usr => usr.uid == user.uid);
@@ -167,10 +182,10 @@ export class AuthService {
       const documento = doc(col, userData.id);
       userData = {
         uid: user.uid,
-        //email: user.email,
+        email: user.email,
         password: pass,
-        //displayName: user.displayName,
-        //photoURL: user.photoURL,
+        displayName: user.displayName,
+        photoURL: user.photoURL,
         emailVerified: user.emailVerified,
       };
 
@@ -194,7 +209,7 @@ export class AuthService {
     return observable;
   }
 
-  private cargarLog(user: any){
+  private cargarLog(user: any) {
     let userLog: UserLog = {};
     userLog.fechaIngreso = new Date().getTime();
     userLog.uid = user.uid;

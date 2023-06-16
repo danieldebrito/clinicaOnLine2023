@@ -1,12 +1,12 @@
 export class Usuario {
   constructor(
+    public email: string,
+    public password: string,
     public uid?: string,
     public id?: string,
-    public email?: string,
-    public password?: string,
     public displayName?: string,
     public photoURL?: string,
-    public emailVerified?: string,
+    public emailVerified?: boolean,
     public nombre?: string,
     public apellido?: string,
     public sexo?: string,
