@@ -12,10 +12,7 @@ const routes: Routes = [
   { path: 'usuarios', loadChildren: () => import('./pages/usuarios/usuarios.module').then(m => m.UsuariosModule) },
   { path: 'contacto', loadChildren: () => import('./pages/contacto/contacto.module').then(m => m.ContactoModule) },
   { path: 'misturnos', loadChildren: () => import('./pages/turnos/pages/mis-turnos/mis-turnos.module').then(m => m.MisTurnosModule) },
-
-
-
-  
+  { path: 'administrador', loadChildren: () => import('./pages/administrador/administrador.module').then(m => m.AdministradorModule), },
   { path: '**', loadChildren: () => import('./pages/error404/error404.module').then(m => m.Error404Module) },
   { path: 'error', loadChildren: () => import('./pages/error404/error404.module').then(m => m.Error404Module) },
 ];
