@@ -1,15 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UsuariosService } from 'src/app/services/usuarios.service';
-import { Usuario, ERole } from 'src/app/class/usuario';
+import { ERole, Usuario } from 'src/app/class/usuario';
+import { EspecialidadesService } from 'src/app/services/especialidades.service';
+import { Especialidad } from 'src/app/class/especialidad';
 
 @Component({
-  selector: 'app-sign-up',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  selector: 'app-sign-up-especialista',
+  templateUrl: './sign-up-especialista.component.html',
+  styleUrls: ['./sign-up-especialista.component.scss']
 })
-export class SignUpComponent {
+export class SignUpEspecialistaComponent implements OnInit {
 
   public error = false;
   public mostrarPass = false;
@@ -17,11 +19,12 @@ export class SignUpComponent {
   public userEmail: string = '';
   public userPwd: string = '';
 
+  public especialidades: Especialidad[] = [];
+
   createForm = new FormGroup({
     //uid: new FormControl('', [Validators.required, Validators.minLength(6)]),
     //id: new FormControl('', [Validators.required, Validators.minLength(6)]),
     //emailVerified: new FormControl('', [Validators.required, Validators.minLength(6)]),
-
     email: new FormControl('', [Validators.required, Validators.minLength(6)]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     displayName: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -37,7 +40,11 @@ export class SignUpComponent {
     //habilitado: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
 
-  constructor(private authService: AuthService, private usuariosService: UsuariosService) { }
+  constructor(
+    private authService: AuthService, 
+    private usuariosService: UsuariosService,
+    private especialidadesSv: EspecialidadesService
+    ) { }
 
 
   public createUser() {
@@ -60,7 +67,7 @@ export class SignUpComponent {
         edad: this.createForm.value.edad ?? '',
         fechaNacimiento: this.createForm.value.fechaNacimiento ?? '',
         foto: this.createForm.value.foto ?? '',
-        role: ERole.paciente,
+        role: ERole.especialista,
         habilitado: true,
       };
 
@@ -85,4 +92,16 @@ export class SignUpComponent {
   public GoogleAuth() {
     this.authService.GoogleAuth();
   }
+
+  public getEspecialidades(){
+    this.especialidadesSv.getItems().subscribe( res => {
+      this.especialidades = res;
+      console.log(res);
+    } );
+  }
+
+  ngOnInit(): void {
+    this.getEspecialidades();
+  }
+
 }

@@ -5,7 +5,6 @@ export class Especialidad {
         public id?: string,
         public nombre?: string,
         public duracionTurno?: number,
-        public activa?: boolean,
-        public jornada?: Jornada   ///  ver de quitar
+        public habilitado?: boolean,
     ) { }
 }

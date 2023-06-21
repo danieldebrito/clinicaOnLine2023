@@ -1,3 +1,9 @@
+export enum ERole {
+  paciente = 'paciente',
+  especialista = 'especialista',
+  administrador = 'administrador'
+}
+
 export class Usuario {
   constructor(
     public email: string,
@@ -14,7 +20,7 @@ export class Usuario {
     public edad?: string,
     public fechaNacimiento?: string,
     public foto?: string,
-    public role?: string,
+    public role?: ERole,
     public habilitado?: boolean
   ) { }
 }
