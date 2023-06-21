@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Especialidad } from 'src/app/class/especialidad';
 
 @Component({
@@ -9,5 +9,10 @@ import { Especialidad } from 'src/app/class/especialidad';
 export class EspecialidadesGridComponent {
 
   @Input() especialidades: Especialidad[] = [];
+  @Output() especialidadSeleccionada = new EventEmitter();
+
+  public lanzarEspecialidad(especialidad: Especialidad) {
+    this.especialidadSeleccionada.emit(especialidad);
+  }
 
 }

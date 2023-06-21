@@ -20,6 +20,7 @@ export class SignUpEspecialistaComponent implements OnInit {
   public userPwd: string = '';
 
   public especialidades: Especialidad[] = [];
+  public espEspecialista: Especialidad[] = [];
 
   createForm = new FormGroup({
     //uid: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -41,10 +42,10 @@ export class SignUpEspecialistaComponent implements OnInit {
   });
 
   constructor(
-    private authService: AuthService, 
+    private authService: AuthService,
     private usuariosService: UsuariosService,
     private especialidadesSv: EspecialidadesService
-    ) { }
+  ) { }
 
 
   public createUser() {
@@ -93,11 +94,16 @@ export class SignUpEspecialistaComponent implements OnInit {
     this.authService.GoogleAuth();
   }
 
-  public getEspecialidades(){
-    this.especialidadesSv.getItems().subscribe( res => {
+  public getEspecialidades() {
+    this.especialidadesSv.getItems().subscribe(res => {
       this.especialidades = res;
       console.log(res);
-    } );
+    });
+  }
+
+  public AddEspecialidadSeleccionada(item: Especialidad) {
+    this.espEspecialista.push(item);
+    console.table(this.espEspecialista);
   }
 
   ngOnInit(): void {

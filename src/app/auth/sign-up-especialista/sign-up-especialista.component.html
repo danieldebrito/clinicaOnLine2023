@@ -179,7 +179,7 @@
 
                         <h1>Especialidades</h1>
 
-                        <app-especialidades-grid [especialidades]="especialidades"></app-especialidades-grid>
+                        <app-especialidades-grid [especialidades]="especialidades" (especialidadSeleccionada)="AddEspecialidadSeleccionada($event)"></app-especialidades-grid>
 
                         <div class="col-sm-12 mt-3">
                             <button type="submit" class="btn btn-primary" [disabled]="!createForm.valid">
@@ -189,7 +189,7 @@
                     </div>
                 </form>
 
-                <div class="redirectToLogin">
+                <div class="redirectToLogin mt-3">
                     <span>¿Ya tenés cuenta?
                         <a class="redirect" routerLink="/sign-in">Ingresá!</a></span>
                 </div>
