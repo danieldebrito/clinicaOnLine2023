@@ -1,12 +1,6 @@
-<div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+<div class="card text-dark bg-light mb-3" style="max-width: 18rem;" (click)="lanzraEspecialidad(especialidad)">
     <div class="card-header"> {{ especialidad.nombre }}</div>
     <div class="card-body">
-        <h5 class="card-title">{{ especialidad.nombre }}</h5>
         <p class="card-text">Duracion del Turno: {{ especialidad.duracionTurno }}</p>
-
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" (click)="lanzraEspecialidad(especialidad)">
-        </div>
-
     </div>
 </div>

@@ -1,5 +1,5 @@
 import { Usuario, ERole } from "./usuario";
-import { Especialidad } from './especialidad';
+import { Jornada } from "../jornada";
 
 export class Especialista extends Usuario {
     constructor(
@@ -19,7 +19,7 @@ export class Especialista extends Usuario {
         foto?: string | undefined,
         role?: ERole | undefined,
         habilitado?: boolean | undefined,
-        public especialidad?: Especialidad[]
+        public jornada?: Jornada[]
     ) {
         super(
             email,

@@ -1,6 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
-import { Usuario } from 'src/app/class/usuario';
-import { UserLog } from 'src/app/class/userLog';
+import { Usuario } from 'src/app/class/usuarios/usuario';
+import { UserLog } from 'src/app/class/usuarios/userLog';
 
 import { Router } from '@angular/router';
 import { catchError, map, take } from 'rxjs/operators';

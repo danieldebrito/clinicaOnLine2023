@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { UsuariosService } from 'src/app/services/usuarios.service';
-import { ERole, Usuario } from 'src/app/class/usuario';
-import { EspecialidadesService } from 'src/app/services/especialidades.service';
+import { ERole, Usuario } from 'src/app/class/usuarios/usuario';
 import { Especialidad } from 'src/app/class/especialidad';
 
 @Component({
@@ -11,7 +9,7 @@ import { Especialidad } from 'src/app/class/especialidad';
   templateUrl: './sign-up-especialista.component.html',
   styleUrls: ['./sign-up-especialista.component.scss']
 })
-export class SignUpEspecialistaComponent implements OnInit {
+export class SignUpEspecialistaComponent {
 
   public error = false;
   public mostrarPass = false;
@@ -43,8 +41,6 @@ export class SignUpEspecialistaComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private usuariosService: UsuariosService,
-    private especialidadesSv: EspecialidadesService
   ) { }
 
 
@@ -94,20 +90,8 @@ export class SignUpEspecialistaComponent implements OnInit {
     this.authService.GoogleAuth();
   }
 
-  public getEspecialidades() {
-    this.especialidadesSv.getItems().subscribe(res => {
-      this.especialidades = res;
-      console.log(res);
-    });
-  }
-
   public AddEspecialidadSeleccionada(item: Especialidad) {
     this.espEspecialista.push(item);
     console.table(this.espEspecialista);
   }
-
-  ngOnInit(): void {
-    this.getEspecialidades();
-  }
-
 }

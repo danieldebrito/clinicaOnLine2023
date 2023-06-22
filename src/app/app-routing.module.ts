@@ -15,8 +15,9 @@ const routes: Routes = [
   { path: 'administrador', loadChildren: () => import('./pages/administrador/administrador.module').then(m => m.AdministradorModule), },
   { path: 'especialidades', loadChildren: () => import('./pages/especialidades/especialidades.module').then(m => m.EspecialidadesModule) },
   { path: 'especialistas', loadChildren: () => import('./auth/sign-up-especialista/sign-up-especialista.module').then(m => m.SignUpEspecialistaModule) },
+  { path: 'jornadas', loadChildren: () => import('./pages/jornada/jornada.module').then(m => m.JornadaModule) },
   { path: '**', loadChildren: () => import('./pages/error404/error404.module').then(m => m.Error404Module) },
-  { path: 'error', loadChildren: () => import('./pages/error404/error404.module').then(m => m.Error404Module) }
+  { path: 'error', loadChildren: () => import('./pages/error404/error404.module').then(m => m.Error404Module) },
 ];
 
 @NgModule({
