@@ -7,7 +7,7 @@ const routes: Routes = [
     path: '',
     component: AdministradorComponent,
     children: [
-      { path: 'usuarios', loadChildren: () => import('src/app/pages/usuarios/usuarios.module').then(m => m.UsuariosModule) },
+      { path: 'usuarios', loadChildren: () => import('src/app/pages/admin/usuarios/usuarios.module').then(m => m.UsuariosModule) },
       { path: 'especialidades', loadChildren: () => import('src/app/pages/especialidades/especialidades.module').then(m => m.EspecialidadesModule) },
 
       /*
