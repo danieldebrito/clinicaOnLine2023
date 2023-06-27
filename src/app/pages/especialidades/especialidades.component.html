@@ -30,18 +30,7 @@
                     </div>
                 </div>
 
-                <!-- Campo duracionTurno -->
-                <div class="col ">
-                    <input class="form-control" type="number" id="duracionTurno" formControlName="duracionTurno" required
-                        minlength="3">
-                    <div class="red"
-                        *ngIf="createForm.get('duracionTurno')?.touched && createForm.get('duracionTurno')?.errors?.['required']">
-                        El campo duracionTurno es requerido.</div>
-                    <div class="red"
-                        *ngIf="createForm.get('duracionTurno')?.touched && createForm.get('duracionTurno')?.errors?.['minlength']">
-                        El campo duracionTurno debe tener al menos 6
-                        caracteres.</div>
-                </div>
+
 
                 <div class="col-2">
                     <button class="btn btn-success"><b>+</b></button>

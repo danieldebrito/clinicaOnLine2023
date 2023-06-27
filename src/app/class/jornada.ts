@@ -6,6 +6,7 @@ export class Jornada {
     public diaDeSemanaEnNumeros?: number,
     public horaInicioJornada?: number,
     public horaFinJornada?: number,
-    public especialidad?: Especialidad
+    public especialidad?: Especialidad,
+    public duracionTurno?: number
   ) {}
 }

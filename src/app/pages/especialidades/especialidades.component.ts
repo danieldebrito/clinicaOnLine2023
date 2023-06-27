@@ -31,7 +31,6 @@ export class EspecialidadesComponent implements OnInit {
         //emailVerified: this.createForm.value.emailVerified ?? '',
 
         nombre: this.createForm.value.nombre ?? '',
-        duracionTurno: this.createForm.value.duracionTurno ?? 30,
         habilitado: true ?? '',
       };
 
