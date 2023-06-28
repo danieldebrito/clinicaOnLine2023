@@ -19,7 +19,7 @@ export class JornadasService {
 
   public getItems(): Observable<Jornada[]> {
     const col = collection(this.firestore, 'jornadas');
-    const queryObservable = query(col, orderBy('nombre')); // ordenar por nombre
+    const queryObservable = query(col, orderBy('diaDeSemanaEnNumeros')); // ordenar por nombre
     const observable = collectionData(queryObservable).pipe(
       map(res => {
         return res as Jornada[];
