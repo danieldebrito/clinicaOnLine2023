@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Especialidad } from 'src/app/class/especialidad';
 import { Jornada } from 'src/app/class/jornada';
@@ -14,8 +15,11 @@ export class JornadaComponent implements OnInit {
 
   @Output() pasaItem = new EventEmitter();
 
+  public userLoggedUID: string = '';
+
+
   public especialidades: Especialidad[] = [];
-  public especialidad: Especialidad = {};
+  public especialidad: string = '';
 
   public jornadas: Jornada[] = [];
   //public jornada: Jornada = {};
@@ -30,7 +34,8 @@ export class JornadaComponent implements OnInit {
 
   constructor(
     private especialidadesSv: EspecialidadesService,
-    private jornadasSv: JornadasService) { }
+    private jornadasSv: JornadasService,
+    private afAuth: AngularFireAuth) { }
 
   public resetFrom() {
     this.formulario.reset({
@@ -54,11 +59,7 @@ export class JornadaComponent implements OnInit {
 
   public onEspecialidadChange(value: any) {
     this.especialidad = value.target.value;
-  }
-  
 
-  public setEspecialidad(especialidad: Especialidad) {
-    this.especialidad = especialidad;
     console.log(this.especialidad);
   }
 
@@ -74,27 +75,45 @@ export class JornadaComponent implements OnInit {
       horaInicioJornada: this.formulario.value.horaInicioJornada ?? 0,
       horaFinJornada: this.formulario.value.horaFinJornada ?? 0,
       duracionTurno: this.formulario.value.duracionTurno ?? 0,
-      especialidad: this.especialidad.nombre || undefined,
+      especialidad: this.especialidad ?? '',
+      userUID: this.userLoggedUID ?? '',
     };
 
 
     console.log(newItem);
 
-    //this.jornadasSv.addItem(newItem);
+    this.jornadasSv.addItem(newItem);
   }
 
 
-  public getJornadas(){
-    this.jornadasSv.getItems().subscribe( res => {
-      this.jornadas = res;
-      console.log(this.jornadas);
+  public getJornadas() {
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        this.jornadasSv.getItems().subscribe(res => {
+          this.jornadas = res.filter( j => j.userUID == user.uid);
+        });
+      } else {
+        this.jornadas = [];
+      }
     });
+
   }
 
   ///////////////////////////////////////////////////////////////////////////////////////////////
 
+  getLoggedUerUID() {
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        this.userLoggedUID = user.uid;
+      } else {
+        this.userLoggedUID = '';
+      }
+    });
+  }
+
   public ngOnInit(): void {
     this.getEspecialidades();
     this.getJornadas();
+    this.getLoggedUerUID();
   }
 }

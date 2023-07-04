@@ -7,6 +7,7 @@ export class Jornada {
     public horaInicioJornada?: number,
     public horaFinJornada?: number,
     public especialidad?: string,
-    public duracionTurno?: number
+    public duracionTurno?: number,
+    public userUID?: string
   ) {}
 }
