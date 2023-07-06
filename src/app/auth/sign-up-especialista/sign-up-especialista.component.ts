@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ERole, Usuario } from 'src/app/class/usuarios/usuario';
+import { ERole, Usuario } from 'src/app/auth/class/usuario';
 import { Especialidad } from 'src/app/class/especialidad';
 
 @Component({

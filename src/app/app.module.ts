@@ -8,7 +8,7 @@ import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
-import { AuthService } from './services/auth.service';
+import { AuthService } from './auth/services/auth.service';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
 @NgModule({

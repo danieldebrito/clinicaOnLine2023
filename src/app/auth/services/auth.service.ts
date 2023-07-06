@@ -1,6 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
-import { Usuario } from 'src/app/class/usuarios/usuario';
-import { UserLog } from 'src/app/class/usuarios/userLog';
+import { Usuario } from 'src/app/auth/class/usuario';
+import { UserLog } from 'src/app/auth/class/userLog';
 
 import { Router } from '@angular/router';
 import { catchError, map, take } from 'rxjs/operators';
@@ -11,8 +11,6 @@ import { Observable, throwError } from 'rxjs';
 import { LogUserService } from './log-user.service';
 import { UsuariosService } from './usuarios.service';
 import * as auth from 'firebase/auth';
-
-
 
 @Injectable({
   providedIn: 'root'

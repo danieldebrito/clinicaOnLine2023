@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { UsuariosService } from 'src/app/services/usuarios.service';
-import { Usuario, ERole } from 'src/app/class/usuarios/usuario';
+import { UsuariosService } from 'src/app/auth/services/usuarios.service';
+import { Usuario, ERole } from 'src/app/auth/class/usuario';
 
 @Component({
   selector: 'app-sign-up',
