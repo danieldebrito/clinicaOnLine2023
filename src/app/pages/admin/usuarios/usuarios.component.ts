@@ -20,6 +20,11 @@ export class UsuariosComponent implements OnInit {
     });
   }
 
+  public deleteUsuario(usuario: any){
+    this.usuariosSvc.delete(usuario.id);
+    this.getUsuarios();
+  }
+
   ngOnInit(): void {
     this.getUsuarios();
   }

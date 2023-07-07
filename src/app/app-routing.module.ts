@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -14,10 +15,11 @@ const routes: Routes = [
   { path: 'usuarios', loadChildren: () => import('./pages/admin/usuarios/usuarios.module').then(m => m.UsuariosModule) },
   { path: 'contacto', loadChildren: () => import('./pages/layout/contacto/contacto.module').then(m => m.ContactoModule) },
   { path: 'misturnos', loadChildren: () => import('./pages/turnos/pages/mis-turnos/mis-turnos.module').then(m => m.MisTurnosModule) },
-  { path: 'administrador', loadChildren: () => import('./pages/admin/administrador/administrador.module').then(m => m.AdministradorModule), },
+  { path: 'administrador', loadChildren: () => import('./pages/admin/administrador/administrador.module').then(m => m.AdministradorModule), canActivate: [AdminGuard] },
   { path: 'especialidades', loadChildren: () => import('./pages/especialidades/especialidades.module').then(m => m.EspecialidadesModule) },
   { path: 'especialistas', loadChildren: () => import('./auth/sign-up-especialista/sign-up-especialista.module').then(m => m.SignUpEspecialistaModule) },
   { path: 'jornadas', loadChildren: () => import('./pages/jornada/jornada.module').then(m => m.JornadaModule) },
+  { path: 'denegado', loadChildren: () => import('./pages/denegado/denegado.module').then(m => m.DenegadoModule) },
   { path: '**', loadChildren: () => import('./pages/layout/error404/error404.module').then(m => m.Error404Module) },
   { path: 'error', loadChildren: () => import('./pages/layout/error404/error404.module').then(m => m.Error404Module) },
 ];

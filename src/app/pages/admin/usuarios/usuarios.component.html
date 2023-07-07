@@ -1,12 +1,13 @@
 <div class="container mt-2">
     <div class="section-title">
         <h2>Usuarios</h2>
-      </div>
+    </div>
     <div class="table-responsive">
         <table class="table user-list">
             <thead>
                 <tr>
                     <th><span>User</span></th>
+                    <th><span> Rol </span></th>
                     <th><span>Nacimiento</span></th>
                     <th class="text-center"><span>Email</span></th>
                     <th><span>Email Vericado ?</span></th>
@@ -16,34 +17,37 @@
             <tbody *ngFor="let item of usuarios">
                 <tr>
                     <td>
-                        <img src="item.photoURL" alt="">
-                        <p><span class="label label-default">{{ item.nombre }} {{ item.apellido }} </span></p>
-                        <span class="user-subhead">{{ item.role }}</span>
+                        <div class="fs-5">
+                            <span class="label label-default">
+                                {{ item.nombre }} {{ item.apellido }} </span>
+                        </div>
+                    </td>
+
+
+                    <td>
+                        <div class="fs-5">
+                            <span class="label label-default">
+                                {{ item.role | titlecase }} </span>
+                        </div>
                     </td>
                     <td>
-                        {{ item.fechaNacimiento }}
+                        <div class="fs-5"><span class="label label-default">
+                                {{ item.fechaNacimiento }}</span>
+                        </div>
                     </td>
-                    <td class="text-center">
-                        <span class="label label-default">{{ item.email }}</span>
+                    <td>
+                        <div class="fs-5">
+                            <span class="label label-default">
+                                {{ item.email }} </span>
+                        </div>
                     </td>
                     <td>
                         <div *ngIf="item.emailVerified">
-                            <a href="#" class="table-link">
-                                <span class="fa-stack">
-                                    <i class="fa fa-square fa-stack-2x"></i>
-                                    <i class="fa fa-check fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
+                            <span class="badge bg-success">Verificado</span>
                         </div>
                         <div *ngIf="!item.emailVerified">
-                            <a href="#" class="table-link danger">
-                                <span class="fa-stack">
-                                    <i class="fa fa-square fa-stack-2x"></i>
-                                    <i class="fa fa-xmark fa-toggle-on fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
+                            <span class="badge bg-danger">Sin Verificar</span>
                         </div>
-                        <span class="label label-default">{{ item.emailVerified }}</span>
                     </td>
                     <td style="width: 20%;">
                         <a href="#" class="table-link">
@@ -58,7 +62,7 @@
                                 <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
                             </span>
                         </a>
-                        <a href="#" class="table-link danger">
+                        <a (click)="deleteUsuario(item)" class="table-link danger">
                             <span class="fa-stack">
                                 <i class="fa fa-square fa-stack-2x"></i>
                                 <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
