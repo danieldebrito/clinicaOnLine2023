@@ -17,43 +17,20 @@
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" routerLink="/home">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" routerLink="/usuarios">Usuarios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" routerLink="/administrador">Administrador</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" routerLink="/misturnos">Mis Turnos</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" routerLink="/contacto">Contacto</a>
-                    </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right" *ngIf="authService.userData as user; else login">
                     <li class="nav-item">
                         <a class="nav-link"></a>
                     </li>
-
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle active" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
@@ -63,7 +40,6 @@
                             <li><a class="dropdown-item" (click)="authService.SignOut()">Sign Out</a></li>
                         </ul>
                     </li>
-
                 </ul>
 
                 <ng-template #login>
@@ -80,3 +56,25 @@
         </div>
     </div>
 </nav>
+
+
+
+<!--
+                        <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+-->

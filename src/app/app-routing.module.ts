@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminGuard } from './guards/admin.guard';
+import { PacienteGuard } from './guards/paciente.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -14,7 +15,7 @@ const routes: Routes = [
   // auth \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   { path: 'usuarios', loadChildren: () => import('./pages/admin/usuarios/usuarios.module').then(m => m.UsuariosModule) },
   { path: 'contacto', loadChildren: () => import('./pages/layout/contacto/contacto.module').then(m => m.ContactoModule) },
-  { path: 'misturnos', loadChildren: () => import('./pages/turnos/pages/mis-turnos/mis-turnos.module').then(m => m.MisTurnosModule) },
+  { path: 'misturnos', loadChildren: () => import('./pages/turnos/pages/mis-turnos/mis-turnos.module').then(m => m.MisTurnosModule), canActivate: [PacienteGuard] },
   { path: 'administrador', loadChildren: () => import('./pages/admin/administrador/administrador.module').then(m => m.AdministradorModule), canActivate: [AdminGuard] },
   { path: 'especialidades', loadChildren: () => import('./pages/especialidades/especialidades.module').then(m => m.EspecialidadesModule) },
   { path: 'especialistas', loadChildren: () => import('./auth/sign-up-especialista/sign-up-especialista.module').then(m => m.SignUpEspecialistaModule) },
