@@ -31,7 +31,7 @@ export class PacienteGuard implements CanActivate {
             map(res => {
               if (res) {
                 this.usuario = res;
-                return res.role == 'paciente';
+                return (res.role == 'paciente' || res.role == 'administrador');
               } else {
                 return false;
               }

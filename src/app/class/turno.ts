@@ -1,6 +1,6 @@
 import { Encuesta } from './encuesta';
 import { Especialidad } from './especialidad';
-import { Especialista } from './especialista';
+import { Especialista } from './usuarios/especialista';
 
 
 export class Turno {

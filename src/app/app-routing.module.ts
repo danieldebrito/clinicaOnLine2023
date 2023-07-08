@@ -19,10 +19,11 @@ const routes: Routes = [
   { path: 'administrador', loadChildren: () => import('./pages/admin/administrador/administrador.module').then(m => m.AdministradorModule), canActivate: [AdminGuard] },
   { path: 'especialidades', loadChildren: () => import('./pages/especialidades/especialidades.module').then(m => m.EspecialidadesModule) },
   { path: 'especialistas', loadChildren: () => import('./auth/sign-up-especialista/sign-up-especialista.module').then(m => m.SignUpEspecialistaModule) },
-  { path: 'jornadas', loadChildren: () => import('./pages/jornada/jornada.module').then(m => m.JornadaModule) },
-  { path: 'denegado', loadChildren: () => import('./pages/denegado/denegado.module').then(m => m.DenegadoModule) },
-  { path: '**', loadChildren: () => import('./pages/layout/error404/error404.module').then(m => m.Error404Module) },
-  { path: 'error', loadChildren: () => import('./pages/layout/error404/error404.module').then(m => m.Error404Module) },
+  { path: 'jornadas', loadChildren: () => import('./pages/especialistas/jornada/jornada.module').then(m => m.JornadaModule) },
+  { path: 'denegado', loadChildren: () => import('./pages/layout/denegado/denegado.module').then(m => m.DenegadoModule) },
+  //{ path: '**', loadChildren: () => import('./pages/layout/error404/error404.module').then(m => m.Error404Module) },
+  //{ path: 'error', loadChildren: () => import('./pages/layout/error404/error404.module').then(m => m.Error404Module) },
+  { path: 'sacarturno', loadChildren: () => import('./pages/turnos/pages/sacar-turno/sacar-turno.module').then(m => m.SacarTurnoModule) },
 ];
 
 @NgModule({
