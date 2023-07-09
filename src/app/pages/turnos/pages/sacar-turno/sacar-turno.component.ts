@@ -5,6 +5,7 @@ import { UsuariosService } from 'src/app/auth/services/usuarios.service';
 import { Especialista } from 'src/app/class/usuarios/especialista';
 import { Especialidad } from 'src/app/class/especialidad';
 import { EspecialidadesService } from 'src/app/services/especialidades.service';
+import { Turno } from 'src/app/class/turno';
 
 
 @Component({
@@ -13,13 +14,13 @@ import { EspecialidadesService } from 'src/app/services/especialidades.service';
 	styleUrls: ['./sacar-turno.component.scss']
 })
 export class SacarTurnoComponent implements OnInit {
+	public active = 1;
+	public disabled = true;
 
 	public especialistas: Especialista[] = [];
 	public especialidades: Especialidad[] = [];
-
-	public active = 1;
-	public disabled = true;
-	public jornada: Jornada = {};
+	public turnos: Turno[] = [];
+	public jornadas: Jornada[] = [];
 
 	constructor(
 		private usuariosSv: UsuariosService,
@@ -29,7 +30,7 @@ export class SacarTurnoComponent implements OnInit {
 	}
 
 	onNavChange(changeEvent: NgbNavChangeEvent) {
-		if (changeEvent.nextId === 3) {
+		if (changeEvent.nextId === 3 || 2 ) {
 			changeEvent.preventDefault();
 		}
 	}

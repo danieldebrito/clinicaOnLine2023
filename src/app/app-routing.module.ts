@@ -23,7 +23,8 @@ const routes: Routes = [
   { path: 'denegado', loadChildren: () => import('./pages/layout/denegado/denegado.module').then(m => m.DenegadoModule) },
   //{ path: '**', loadChildren: () => import('./pages/layout/error404/error404.module').then(m => m.Error404Module) },
   //{ path: 'error', loadChildren: () => import('./pages/layout/error404/error404.module').then(m => m.Error404Module) },
-  { path: 'sacarturno', loadChildren: () => import('./pages/turnos/pages/sacar-turno/sacar-turno.module').then(m => m.SacarTurnoModule) },
+  { path: 'sacarturno', loadChildren: () => import('./pages/turnos/pages/sacar-turno/sacar-turno.module').then(m => m.SacarTurnoModule), canActivate: [PacienteGuard] },
+  { path: 'presignup', loadChildren: () => import('./pages/layout/pre-sign-up/pre-sign-up.module').then(m => m.PreSignUpModule) },
 ];
 
 @NgModule({

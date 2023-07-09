@@ -33,6 +33,18 @@
                             <li><a class="dropdown-item" routerLink="/misturnos">Mis Turnos</a></li>
                         </ul>
                     </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Especialistas
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" routerLink="/jornadas">Gestion de Jornadas</a></li>
+                            <li><a class="dropdown-item" routerLink="/misturnos">Mis Turnos</a></li>
+                        </ul>
+                    </li>
+
                 </ul>
                 <ul class="nav navbar-nav navbar-right" *ngIf="authService.userData as user; else login">
                     <li class="nav-item">
@@ -55,7 +67,7 @@
                             <a class="nav-link" routerLink="/sign-in">Ingresá</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn btn-success" routerLink="/sign-up">Creá tu cuenta</a>
+                            <a class="nav-link btn btn-success" routerLink="/presignup">Creá tu cuenta</a>
                         </li>
                     </ul>
                 </ng-template>

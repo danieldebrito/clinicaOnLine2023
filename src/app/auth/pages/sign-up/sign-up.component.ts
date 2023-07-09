@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UsuariosService } from 'src/app/auth/services/usuarios.service';
@@ -9,10 +9,11 @@ import { Usuario, ERole } from 'src/app/auth/class/usuario';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent {
+export class SignUpComponent implements OnInit {
 
   public error = false;
   public mostrarPass = false;
+  public role: ERole = ERole.paciente;
 
   public userEmail: string = '';
   public userPwd: string = '';
@@ -24,15 +25,15 @@ export class SignUpComponent {
 
     email: new FormControl('', [Validators.required, Validators.minLength(6)]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    displayName: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    photoURL: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    nombre: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    apellido: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    sexo: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    dni: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    edad: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    displayName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    photoURL: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    nombre: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    apellido: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    sexo: new FormControl('', [Validators.required, Validators.minLength(1)]),
+    dni: new FormControl('', [Validators.required, Validators.minLength(7)]),
+    edad: new FormControl('', [Validators.required, Validators.minLength(1)]),
     fechaNacimiento: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    foto: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    foto: new FormControl('', [Validators.required, Validators.minLength(2)]),
     //role: new FormControl('', [Validators.required, Validators.minLength(6)]),
     //habilitado: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
@@ -60,7 +61,7 @@ export class SignUpComponent {
         edad: this.createForm.value.edad ?? '',
         fechaNacimiento: this.createForm.value.fechaNacimiento ?? '',
         foto: this.createForm.value.foto ?? '',
-        role: ERole.paciente,
+        role: this.role,
         habilitado: true,
       };
 
@@ -85,4 +86,9 @@ export class SignUpComponent {
   public GoogleAuth() {
     this.authService.GoogleAuth();
   }
+
+  ngOnInit(): void {
+    this.role = this.usuariosService.role;
+  }
+
 }
