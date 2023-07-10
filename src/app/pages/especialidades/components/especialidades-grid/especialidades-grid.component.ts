@@ -8,10 +8,10 @@ import { Especialidad } from 'src/app/class/especialidad';
 })
 export class EspecialidadesGridComponent {
 
-  @Input() especialidades: Especialidad[] = [];
+  @Input() especialidades: String[] = [];
   @Output() especialidadSeleccionada = new EventEmitter();
 
-  public lanzarEspecialidad(especialidad: Especialidad) {
+  public lanzarEspecialidad(especialidad: String) {
     this.especialidadSeleccionada.emit(especialidad);
   }
 

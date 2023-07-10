@@ -1,5 +1,4 @@
 import { Encuesta } from './encuesta';
-import { Especialidad } from './especialidad';
 import { Especialista } from './usuarios/especialista';
 
 
@@ -9,15 +8,15 @@ export class Turno {
         public fecha?: Date,
         public dia?: string,
         public especialista?: Especialista,
-        public especialidad?: Especialidad,
-        public estado?: Estado,
+        public especialidad?: String,
+        public estado?: EEstado,
         public motivoRechazo?: string,
         public encuesta?: Encuesta,
     ) { }
 }
 
 
-export enum Estado {
+export enum EEstado {
     aceptado = 'aceptado',
     rechazado = 'recahazado',
     cumplido = 'cumplido',

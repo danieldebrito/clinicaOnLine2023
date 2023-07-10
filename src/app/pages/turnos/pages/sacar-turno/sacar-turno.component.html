@@ -4,7 +4,7 @@
             <button ngbNavLink>1</button>
             <ng-template ngbNavContent>
                 <div class="mt-3" (click)="nav.select(2)">
-                    <app-especialidades-grid [especialidades]="especialidades"></app-especialidades-grid>
+                    <app-especialidades-grid [especialidades]="especialidadesNombre" (especialidadSeleccionada)="getEspecialistasEspecialidad($event)" ></app-especialidades-grid>
                 </div>
             </ng-template>
         </li>
@@ -12,14 +12,14 @@
             <button ngbNavLink>2</button>
             <ng-template ngbNavContent>
                 <div class="mt-3" (click)="nav.select(3)">
-                    <app-especialistas-grid [especialistas]="especialistas"></app-especialistas-grid>
+                    <app-especialistas-grid [especialistas]="especialistasFiltrados" (itemSel)="getjornadasEspecialista($event)" ></app-especialistas-grid>
                 </div>
             </ng-template>
         </li>
         <li [ngbNavItem]="3">
             <button ngbNavLink>3</button>
             <ng-template ngbNavContent>
-                <app-turnos-grid [jornadas]="jornadas"></app-turnos-grid>
+                <app-turnos-generador [jornadas]="jornadasFiltradas" [especialista]="especialista" [especialidad]="especialidadSeleccionadaNombre" ></app-turnos-generador>
             </ng-template>
         </li>
     </ul>
@@ -28,7 +28,7 @@
 
     <div class="mb-3">
 
-        <button class="btn btn-sm btn-outline-danger" (click)="nav.select(1)">
+        <button class="btn btn-sm btn-outline-danger mt-3" (click)="nav.select(1)">
             Cancelar
         </button>
     </div>

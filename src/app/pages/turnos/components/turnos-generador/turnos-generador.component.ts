@@ -1,18 +1,20 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Jornada } from 'src/app/class/jornada';
-import { Turno } from 'src/app/class/turno';
-import { JornadasService } from 'src/app/services/jornadas.service';
+import { EEstado, Turno } from 'src/app/class/turno';
 
 @Component({
-  selector: 'app-turnos-grid',
-  templateUrl: './turnos-grid.component.html',
-  styleUrls: ['./turnos-grid.component.scss']
+  selector: 'app-turnos-generador',
+  templateUrl: './turnos-generador.component.html',
+  styleUrls: ['./turnos-generador.component.scss']
 })
-export class TurnosGridComponent implements OnInit {
+export class TurnosGeneradorComponent implements OnChanges {
 
   @Input() jornadas: Jornada[] = [];
-  @Input() turnos: Turno[] = [];
+  @Input() especialista: any = {};
+  @Input() especialidad: String = '';
 
+
+  @Input() turnos: Turno[] = [];
   public dias = [
     { dia: 'lunes', numero: 1 },
     { dia: 'martes', numero: 1 },
@@ -22,65 +24,95 @@ export class TurnosGridComponent implements OnInit {
     { dia: 'sabado', numero: 1 }
   ];
 
-  constructor(private jornadasSv: JornadasService) { }
-
-  public generateTurnos(jornadas: Jornada[]) {
-
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes["jornadas"] && changes["jornadas"].currentValue) {
+      const updatedJornadas: Jornada[] = changes["jornadas"].currentValue;
+      this.generateTurnos(updatedJornadas);
+    }
   }
 
+  public generateTurnos(jornadas: Jornada[]) {
+    jornadas.forEach(element => {
+      this.generadorDeTurnos(element);
+    });
+  }
 
   public generadorDeTurnos(jornada: any) {
-    // cuantos irtervalos por hora * cantidad de horas de atencion
+    let turnosGenerados: Turno[] = [];
+
+    // Fecha actual
+    const fechaActual = new Date();
+
+    // cuantos intervalos por hora * cantidad de horas de atención
     const cant =
       (60 / jornada.duracionTurno) *
-      (jornada.horaFinJornada -
-        jornada.horaInicioJornada);
+      (jornada.horaFinJornada - jornada.horaInicioJornada);
 
     // primer semana
     for (let i = 0; i < cant; i++) {
+      // quito el domingo (6) y pongo el dia de la jornada en la grilla 0 = lunes, 1 = martes, etc....
       for (let j = 0; j < 7; j++) {
-        // quito el domingo (6) y pongo el dia de la jornada en la grilla 0 = lunes, 1 =  martes,  etc....
-        if (j !== 6 && j == jornada.diaDeSemanaEnNumeros) {
-          this.turnos.push({
-            // le sumo un dia ( 24hs ) para armar los Turnos ( 60*24 = 1440 )
+        if (j != 6 && j == jornada.diaDeSemanaEnNumeros) {
+          turnosGenerados.push({
             fecha: this.sumarMinuts(i * jornada.duracionTurno + 1440 * j),
             dia: this.getNombreDia(j),
+            especialista: this.especialista,
+            especialidad: this.especialidad,
+            estado: EEstado.disponible
           });
         }
       }
+
       // segunda semana
       for (let j = 7; j < 14; j++) {
-        if (j !== 13 && j == jornada.diaDeSemanaEnNumeros + 7) {
-          this.turnos.push({
+        if (j != 13 && j == jornada.diaDeSemanaEnNumeros + 7) {
+          turnosGenerados.push({
             fecha: this.sumarMinuts(i * jornada.duracionTurno + 1440 * j),
-            dia: this.getNombreDia(j - 7),
+            dia: this.getNombreDia(jornada.diaDeSemanaEnNumeros),
+            especialista: this.especialista,
+            especialidad: this.especialidad,
+            estado: EEstado.disponible
+          });
+        }
+      }
+
+      // tercera semana
+      for (let j = 14; j < 21; j++) {
+        if (j != 20 && j == jornada.diaDeSemanaEnNumeros + 14) {
+          turnosGenerados.push({
+            fecha: this.sumarMinuts(i * jornada.duracionTurno + 1440 * j),
+            dia: this.getNombreDia(jornada.diaDeSemanaEnNumeros),
+            especialista: this.especialista,
+            especialidad: this.especialidad,
+            estado: EEstado.disponible
           });
         }
       }
     }
-    console.log(this.turnos);
-  } ///////////////////////////////////////////////////////////////
+
+    this.turnos = turnosGenerados.filter(turno => turno.fecha && turno.fecha > fechaActual && (fechaActual.getDay() - turno.fecha.getDay()) < 21);
+  }
 
   public getNombreDia(dia: number) {
     let ret: string = '';
     switch (dia) {
       case 0:
-        ret = 'Lun';
+        ret = 'Lunes';
         break;
       case 1:
-        ret = 'Mar';
+        ret = 'Martes';
         break;
       case 2:
-        ret = 'Mie';
+        ret = 'Miercoles';
         break;
       case 3:
-        ret = 'Jue';
+        ret = 'Jueves';
         break;
       case 4:
-        ret = 'Vie';
+        ret = 'Viernes';
         break;
       case 5:
-        ret = 'Sab';
+        ret = 'Sabado';
         break;
       case 6:
         ret = 'Dom';
@@ -136,18 +168,5 @@ export class TurnosGridComponent implements OnInit {
 
   public getToday() {
     return new Date();
-  }
-  
-
-  ngOnInit(): void {
-
-    this.jornadasSv.getItems().subscribe( res => {
-      this.generadorDeTurnos(res[0]);
-    });
-
-
-    this.jornadasSv.getItems().subscribe(res => {
-      this.jornadas = res;
-    });
   }
 }

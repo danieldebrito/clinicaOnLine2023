@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Turno } from 'src/app/class/turno';
 
 @Component({
   selector: 'app-turno-card',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./turno-card.component.scss']
 })
 export class TurnoCardComponent {
+
+  @Input() turno: Turno = {};
 
 }
