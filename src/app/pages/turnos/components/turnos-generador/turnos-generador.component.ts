@@ -1,6 +1,10 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { timestamp } from 'rxjs';
 import { Jornada } from 'src/app/class/jornada';
-import { EEstado, Turno } from 'src/app/class/turno';
+import { EEstadoTurno, Turno } from 'src/app/class/turno';
+import { Paciente } from 'src/app/class/usuarios/paciente';
+import { turnosService } from 'src/app/services/turnos.service';
+
 
 @Component({
   selector: 'app-turnos-generador',
@@ -12,9 +16,17 @@ export class TurnosGeneradorComponent implements OnChanges {
   @Input() jornadas: Jornada[] = [];
   @Input() especialista: any = {};
   @Input() especialidad: String = '';
-
+  @Input() paciente: Paciente = { email: '', password: '' };
 
   @Input() turnos: Turno[] = [];
+  public turnosGenerados: Turno[] = [];
+
+
+  @Output() thowTurno = new EventEmitter();
+
+  constructor(private turnosSv: turnosService) { }
+
+
   public dias = [
     { dia: 'lunes', numero: 1 },
     { dia: 'martes', numero: 1 },
@@ -39,6 +51,7 @@ export class TurnosGeneradorComponent implements OnChanges {
 
   public generadorDeTurnos(jornada: any) {
     let turnosGenerados: Turno[] = [];
+    let turnosTemp: Turno[] = [];
 
     // Fecha actual
     const fechaActual = new Date();
@@ -58,7 +71,8 @@ export class TurnosGeneradorComponent implements OnChanges {
             dia: this.getNombreDia(j),
             especialista: this.especialista,
             especialidad: this.especialidad,
-            estado: EEstado.disponible
+            paciente: this.paciente,
+            estado: EEstadoTurno.disponible
           });
         }
       }
@@ -71,7 +85,8 @@ export class TurnosGeneradorComponent implements OnChanges {
             dia: this.getNombreDia(jornada.diaDeSemanaEnNumeros),
             especialista: this.especialista,
             especialidad: this.especialidad,
-            estado: EEstado.disponible
+            paciente: this.paciente,
+            estado: EEstadoTurno.disponible
           });
         }
       }
@@ -84,13 +99,23 @@ export class TurnosGeneradorComponent implements OnChanges {
             dia: this.getNombreDia(jornada.diaDeSemanaEnNumeros),
             especialista: this.especialista,
             especialidad: this.especialidad,
-            estado: EEstado.disponible
+            paciente: this.paciente,
+            estado: EEstadoTurno.disponible
           });
         }
       }
     }
 
-    this.turnos = turnosGenerados.filter(turno => turno.fecha && turno.fecha > fechaActual && (fechaActual.getDay() - turno.fecha.getDay()) < 21);
+    this.turnosSv.getItems().subscribe(res => {
+      this.turnos = res;
+
+      turnosTemp = (turnosGenerados.filter(turno => turno.fecha && turno.fecha > fechaActual && (fechaActual.getDay() - turno.fecha.getDay()) < 21))
+      this.turnosGenerados = turnosTemp.filter(turnoA => !this.turnos.some(turnoB => turnoB.fecha == turnoA.fecha));
+
+      console.log(turnosTemp);
+      console.log(this.turnos[0].fecha);
+
+    });
   }
 
   public getNombreDia(dia: number) {
@@ -164,6 +189,10 @@ export class TurnosGeneradorComponent implements OnChanges {
     }
     // retorno el lunes 8:00 AM
     return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 8, 0);
+  }
+
+  public lanzarTurno(turno: Turno) {
+    this.thowTurno.emit(turno);
   }
 
   public getToday() {

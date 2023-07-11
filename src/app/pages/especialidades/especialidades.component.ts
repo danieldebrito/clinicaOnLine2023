@@ -14,7 +14,6 @@ export class EspecialidadesComponent implements OnInit {
   public showAdd: boolean = false;
   public especialidades: Especialidad[] = [];
 
-
   createForm = new FormGroup({
     nombre: new FormControl('', [Validators.required, Validators.minLength(6)]),
     duracionTurno: new FormControl( 30, [Validators.required, Validators.minLength(2)]),

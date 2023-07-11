@@ -5,6 +5,10 @@ import { TurnosListComponent } from './turnos-list/turnos-list.component';
 import { BarraBusquedaComponent } from './barra-busqueda/barra-busqueda.component';
 import { TurnosGridComponent } from './turnos-grid/turnos-grid.component';
 import { TurnosGeneradorComponent } from './turnos-generador/turnos-generador.component';
+import { TurnoDetalleComponent } from './turno-detalle/turno-detalle.component';
+import { EspecialidadesModule } from '../../especialidades/especialidades.module';
+import { EspecialistaComponentsModule } from '../../especialistas/components/especialista-components.module';
+
 
 @NgModule({
   declarations: [
@@ -12,17 +16,21 @@ import { TurnosGeneradorComponent } from './turnos-generador/turnos-generador.co
     TurnosListComponent,
     BarraBusquedaComponent,
     TurnosGridComponent,
-    TurnosGeneradorComponent
+    TurnosGeneradorComponent,
+    TurnoDetalleComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    EspecialistaComponentsModule,
+    EspecialidadesModule
   ],
   exports: [
     TurnoCardComponent,
     TurnosListComponent,
     BarraBusquedaComponent,
     TurnosGridComponent,
-    TurnosGeneradorComponent
+    TurnosGeneradorComponent,
+    TurnoDetalleComponent
   ]
 })
 export class TurnosComponentsModule { }

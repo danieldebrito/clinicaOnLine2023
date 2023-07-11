@@ -8,7 +8,7 @@ import { Especialidad } from 'src/app/class/especialidad';
 })
 export class EspecialidadesItemComponent {
 
-  @Input() especialidad: Especialidad = {};
+  @Input() especialidad: any = '';
   @Output() especialidadSeleccionada = new EventEmitter();
 
   public lanzraEspecialidad(especialidad: Especialidad) {

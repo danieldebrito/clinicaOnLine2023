@@ -1,22 +1,24 @@
 import { Encuesta } from './encuesta';
 import { Especialista } from './usuarios/especialista';
-
+import { Paciente } from './usuarios/paciente';
 
 export class Turno {
     constructor(
         public id?: string,
         public fecha?: Date,
         public dia?: string,
+        public hora?: Number,
         public especialista?: Especialista,
+        public paciente?: Paciente,
         public especialidad?: String,
-        public estado?: EEstado,
+        public estado?: EEstadoTurno,
         public motivoRechazo?: string,
         public encuesta?: Encuesta,
     ) { }
 }
 
 
-export enum EEstado {
+export enum EEstadoTurno {
     aceptado = 'aceptado',
     rechazado = 'recahazado',
     cumplido = 'cumplido',
