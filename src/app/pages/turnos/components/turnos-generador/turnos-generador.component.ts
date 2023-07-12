@@ -159,7 +159,7 @@ export class TurnosGeneradorComponent implements OnChanges {
   }
 
 public getFechaHora(date: Date){
-  return date.getDate() + '-' + (date.getMonth() + 1) + ' ' +  date.getHours() + ':' + date.getMinutes();
+  return date.getDate() + '/' + (date.getMonth() + 1) + ' ' +  date.getHours() + ':' + date.getMinutes() + 'hs';
 }
 
   public sumarMinuts(minuts: number) {

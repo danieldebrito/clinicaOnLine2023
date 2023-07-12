@@ -1,8 +1,12 @@
 <div class="card mt-3">
     <div class="card-body">
-        <p class="card-text"> {{ turno.dia }} <br> {{ turno.fecha | date }}</p>
+        <p class="card-text"> {{ turno.dia }} <br>
+            {{ turno.diahora }}
+            <!--
+            {{ turno.fecha | date }}</p>
         <h5 class="card-title">{{ turno.fecha | date:'shortTime' }}</h5>
         
+        -->
         <p class="card-text">
             especialista : <br>
             {{ turno.especialista?.nombre }} {{ turno.especialista?.apellido }} <br>
@@ -11,6 +15,3 @@
         </p>
     </div>
 </div>
-
-
-

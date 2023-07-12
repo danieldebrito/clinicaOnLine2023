@@ -8,6 +8,7 @@ import { TurnosGeneradorComponent } from './turnos-generador/turnos-generador.co
 import { TurnoDetalleComponent } from './turno-detalle/turno-detalle.component';
 import { EspecialidadesModule } from '../../especialidades/especialidades.module';
 import { EspecialistaComponentsModule } from '../../especialistas/components/especialista-components.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { EspecialistaComponentsModule } from '../../especialistas/components/esp
   imports: [
     CommonModule,
     EspecialistaComponentsModule,
-    EspecialidadesModule
+    EspecialidadesModule,
+    FormsModule
   ],
   exports: [
     TurnoCardComponent,
