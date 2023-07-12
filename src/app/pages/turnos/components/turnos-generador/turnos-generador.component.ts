@@ -69,6 +69,7 @@ export class TurnosGeneradorComponent implements OnChanges {
           turnosGenerados.push({
             fecha: this.sumarMinuts(i * jornada.duracionTurno + 1440 * j),
             dia: this.getNombreDia(j),
+            diahora: this.getFechaHora(this.sumarMinuts(i * jornada.duracionTurno + 1440 * j)),
             especialista: this.especialista,
             especialidad: this.especialidad,
             paciente: this.paciente,
@@ -83,6 +84,7 @@ export class TurnosGeneradorComponent implements OnChanges {
           turnosGenerados.push({
             fecha: this.sumarMinuts(i * jornada.duracionTurno + 1440 * j),
             dia: this.getNombreDia(jornada.diaDeSemanaEnNumeros),
+            diahora: this.getFechaHora(this.sumarMinuts(i * jornada.duracionTurno + 1440 * j)),
             especialista: this.especialista,
             especialidad: this.especialidad,
             paciente: this.paciente,
@@ -97,6 +99,7 @@ export class TurnosGeneradorComponent implements OnChanges {
           turnosGenerados.push({
             fecha: this.sumarMinuts(i * jornada.duracionTurno + 1440 * j),
             dia: this.getNombreDia(jornada.diaDeSemanaEnNumeros),
+            diahora: this.getFechaHora(this.sumarMinuts(i * jornada.duracionTurno + 1440 * j)),
             especialista: this.especialista,
             especialidad: this.especialidad,
             paciente: this.paciente,
@@ -109,11 +112,17 @@ export class TurnosGeneradorComponent implements OnChanges {
     this.turnosSv.getItems().subscribe(res => {
       this.turnos = res;
 
+      //filtro los turnos para que me retorne de ahora en mas hasta 21 dias
       turnosTemp = (turnosGenerados.filter(turno => turno.fecha && turno.fecha > fechaActual && (fechaActual.getDay() - turno.fecha.getDay()) < 21))
-      this.turnosGenerados = turnosTemp.filter(turnoA => !this.turnos.some(turnoB => turnoB.fecha == turnoA.fecha));
 
-      console.log(turnosTemp);
-      console.log(this.turnos[0].fecha);
+      // comparo los dos arrays para que me saque los turnos ocupados, si un elemento coincide con un elemento en "diahora" con el array de ocupados no lo muestro
+      this.turnosGenerados = turnosTemp.filter(turnoA => !this.turnos.some(turnoB => turnoB.diahora == turnoA.diahora));
+
+      this.turnosGenerados.sort((a: any, b: any) => {
+        const fechaA = new Date(a.fecha).getTime();
+        const fechaB = new Date(b.fecha).getTime();
+        return fechaA - fechaB;
+      });
 
     });
   }
@@ -149,37 +158,12 @@ export class TurnosGeneradorComponent implements OnChanges {
     return ret;
   }
 
-  public sumarDias(dias: number) {
-    const fecha = new Date(
-      this.getToday().getFullYear(),
-      this.getToday().getMonth(),
-      this.getToday().getDate(),
-      8,
-      0
-    );
-    fecha.setDate(fecha.getDate() + dias);
-
-    return fecha;
-  }
+public getFechaHora(date: Date){
+  return date.getDate() + '-' + (date.getMonth() + 1) + ' ' +  date.getHours() + ':' + date.getMinutes();
+}
 
   public sumarMinuts(minuts: number) {
     return new Date(this.getMonday(this.getToday()).getTime() + minuts * 60000);
-  }
-
-  public fechaToString(fecha: Date) {
-    const dia = fecha.getDate().toString();
-    const mes = (fecha.getMonth() + 1).toString();
-    const anio = fecha.getFullYear().toString();
-    const hora =
-      fecha.getHours() < 10
-        ? '0' + fecha.getHours().toString()
-        : fecha.getHours().toString();
-    const minutos =
-      fecha.getMinutes() < 10
-        ? '0' + fecha.getMinutes().toString()
-        : fecha.getMinutes().toString();
-
-    return dia + '/' + mes + '/' + anio + ' ' + hora + ':' + minutos;
   }
 
   public getMonday(date: Date) {
