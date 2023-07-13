@@ -8,7 +8,7 @@ export class Especialista extends Usuario {
         uid?: string | undefined,
         id?: string | undefined,
         displayName?: string | undefined,
-        photoURL?: string | undefined,
+        photoURL?: any | undefined,
         emailVerified?: boolean | undefined,
         nombre?: string | undefined,
         apellido?: string | undefined,

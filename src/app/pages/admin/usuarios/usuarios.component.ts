@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/auth/class/usuario';
 import { UsuariosService } from 'src/app/auth/services/usuarios.service';
+import { ImageService } from 'src/app/services/File/image.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -11,12 +12,13 @@ export class UsuariosComponent implements OnInit {
 
   public usuarios: Usuario[] = [];
 
-  constructor( private usuariosSvc: UsuariosService ){}
+  constructor( 
+    private usuariosSvc: UsuariosService,
+    private imagenesSv: ImageService ){}
 
   public getUsuarios(){
     this.usuariosSvc.getItems().subscribe( res => {
       this.usuarios = res;
-      console.log(res);
     });
   }
 

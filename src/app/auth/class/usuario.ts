@@ -11,7 +11,7 @@ export class Usuario {
     public uid?: string,
     public id?: string,
     public displayName?: string,
-    public photoURL?: string,
+    public photoURL?: any,
     public emailVerified?: boolean,
     public nombre?: string,
     public apellido?: string,
